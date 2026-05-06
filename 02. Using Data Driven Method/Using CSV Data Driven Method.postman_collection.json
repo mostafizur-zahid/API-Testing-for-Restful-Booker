@@ -1,0 +1,664 @@
+{
+  "info": {
+    "_postman_id": "0a6b9e04-d871-4dc4-ab51-444dd4021b70",
+    "name": "Using CSV Data Driven Method",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53755782",
+    "_collection_link": "https://go.postman.co/collection/53755782-0a6b9e04-d871-4dc4-ab51-444dd4021b70?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GetBookingID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{url}}booking",
+          "host": [
+            "{{url}}booking"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateBooking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json(); ",
+              "pm.environment.set(\"Id\", responseBody.bookingid);",
+              "",
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 201 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(201);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "});",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "",
+              "var firstname = pm.iterationData.get(\"firstname\");",
+              "pm.environment.set(\"firstname\", firstname);",
+              "",
+              "var lastname = pm.iterationData.get(\"lastname\");   ",
+              "pm.environment.set(\"lastname\", lastname);",
+              "",
+              "var totalprice = pm.iterationData.get(\"totalprice\");   ",
+              "pm.environment.set(\"totalprice\", totalprice);",
+              "",
+              "var depositpaid = pm.iterationData.get(\"depositpaid\");   ",
+              "pm.environment.set(\"depositpaid\", depositpaid);",
+              "",
+              "var checkin = pm.iterationData.get(\"checkin\");  ",
+              "pm.environment.set(\"checkin\", checkin);",
+              "",
+              "var checkout = pm.iterationData.get(\"checkout\");   ",
+              "pm.environment.set(\"checkout\", checkout);",
+              "",
+              "var additionalneeds = pm.iterationData.get(\"additionalneeds\");   ",
+              "pm.environment.set(\"additionalneeds\", additionalneeds);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"firstname\" : \"{{firstname}}\",\n    \"lastname\" : \"{{lastname}}\",\n    \"totalprice\" : {{totalprice}},\n    \"depositpaid\" : {{depositpaid}},\n    \"bookingdates\" : {\n        \"checkin\" : \"{{checkin}}\",\n        \"checkout\" : \"{{checkout}}\"\n    },\n    \"additionalneeds\" : \"{{additionalneeds}}\"\n}"
+        },
+        "url": {
+          "raw": "{{url}}booking",
+          "host": [
+            "{{url}}booking"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetBooking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "var responseBody = pm.response.json(); ",
+              "console.log(responseBody);",
+              "",
+              "pm.test(\"Verify the firstname\", function(){",
+              "    pm.expect(pm.environment.get(\"firstname\")).to.eql(responseBody.firstname);",
+              "});",
+              "pm.test(\"Verify the lastname\", function(){",
+              "    pm.expect(pm.environment.get(\"lastname\")).to.eql(responseBody.lastname);",
+              "});",
+              "",
+              "pm.test(\"Verify the totalprice\", function(){",
+              "    pm.expect(Number(pm.environment.get(\"totalprice\"))).to.eql(responseBody.totalprice);",
+              "});",
+              "",
+              "pm.test(\"Verify depositpaid\", function () {",
+              "    pm.expect(pm.environment.get(\"depositpaid\")).to.eql(responseBody.depositpaid);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify checkin date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkin\")).to.eql(responseBody.bookingdates.checkin);",
+              "});",
+              "",
+              "pm.test(\"Verify checkout date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkout\")).to.eql(responseBody.bookingdates.checkout);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify additional needs\", function () {",
+              "    pm.expect(pm.environment.get(\"additionalneeds\")).to.eql(responseBody.additionalneeds);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}booking/{{Id}}",
+          "host": [
+            "{{url}}booking"
+          ],
+          "path": [
+            "{{Id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateToken",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();",
+              "pm.environment.set(\"token\", responseBody.token);",
+              "",
+              "//Assertion",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(1000);",
+              "})",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\" : \"admin\",\n    \"password\" : \"password123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{url}}auth",
+          "host": [
+            "{{url}}auth"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "UpdateBooking",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "",
+              "var firstname = pm.iterationData.get(\"firstname\");",
+              "pm.environment.set(\"firstname\", firstname);",
+              "",
+              "var lastname = pm.iterationData.get(\"lastname\");   ",
+              "pm.environment.set(\"lastname\", lastname);",
+              "",
+              "var totalprice = pm.iterationData.get(\"totalprice\");   ",
+              "pm.environment.set(\"totalprice\", totalprice);",
+              "",
+              "var depositpaid = pm.iterationData.get(\"depositpaid\");   ",
+              "pm.environment.set(\"depositpaid\", depositpaid);",
+              "",
+              "var checkin = pm.iterationData.get(\"checkin\");  ",
+              "pm.environment.set(\"checkin\", checkin);",
+              "",
+              "var checkout = pm.iterationData.get(\"checkout\");   ",
+              "pm.environment.set(\"checkout\", checkout);",
+              "",
+              "var additionalneeds = pm.iterationData.get(\"additionalneeds\");   ",
+              "pm.environment.set(\"additionalneeds\", additionalneeds);",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "var responseBody = pm.response.json(); ",
+              "console.log(responseBody);",
+              "",
+              "pm.test(\"Verify the firstname\", function(){",
+              "    pm.expect(pm.environment.get(\"firstname\")).to.eql(responseBody.firstname);",
+              "});",
+              "pm.test(\"Verify the lastname\", function(){",
+              "    pm.expect(pm.environment.get(\"lastname\")).to.eql(responseBody.lastname);",
+              "});",
+              "",
+              "pm.test(\"Verify the totalprice\", function(){",
+              "    pm.expect(Number(pm.environment.get(\"totalprice\"))).to.eql(responseBody.totalprice);",
+              "});",
+              "",
+              "pm.test(\"Verify depositpaid\", function () {",
+              "    pm.expect(pm.environment.get(\"depositpaid\")).to.eql(responseBody.depositpaid);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify checkin date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkin\")).to.eql(responseBody.bookingdates.checkin);",
+              "});",
+              "",
+              "pm.test(\"Verify checkout date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkout\")).to.eql(responseBody.bookingdates.checkout);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify additional needs\", function () {",
+              "    pm.expect(pm.environment.get(\"additionalneeds\")).to.eql(responseBody.additionalneeds);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Cookie",
+            "value": "token=    {{token}}",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"firstname\" : \"{{firstname}}\",\n    \"lastname\" : \"{{lastname}}\",\n    \"totalprice\" : {{totalprice}},\n    \"depositpaid\" : {{depositpaid}},\n    \"bookingdates\" : {\n        \"checkin\" : \"{{checkin}}\",\n        \"checkout\" : \"{{checkout}}\"\n    },\n    \"additionalneeds\" : \"{{additionalneeds}}\"\n}"
+        },
+        "url": {
+          "raw": "{{url}}booking/{{Id}}",
+          "host": [
+            "{{url}}booking"
+          ],
+          "path": [
+            "{{Id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetBooking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "pm.test(\"Response file JSON or Not\", function(){",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "var responseBody = pm.response.json(); ",
+              "console.log(responseBody);",
+              "",
+              "pm.test(\"Verify the firstname\", function(){",
+              "    pm.expect(pm.environment.get(\"firstname\")).to.eql(responseBody.firstname);",
+              "});",
+              "pm.test(\"Verify the lastname\", function(){",
+              "    pm.expect(pm.environment.get(\"lastname\")).to.eql(responseBody.lastname);",
+              "});",
+              "",
+              "pm.test(\"Verify the totalprice\", function(){",
+              "    pm.expect(Number(pm.environment.get(\"totalprice\"))).to.eql(responseBody.totalprice);",
+              "});",
+              "",
+              "pm.test(\"Verify depositpaid\", function () {",
+              "    pm.expect(pm.environment.get(\"depositpaid\")).to.eql(responseBody.depositpaid);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify checkin date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkin\")).to.eql(responseBody.bookingdates.checkin);",
+              "});",
+              "",
+              "pm.test(\"Verify checkout date\", function () {",
+              "    pm.expect(pm.environment.get(\"checkout\")).to.eql(responseBody.bookingdates.checkout);",
+              "});",
+              "",
+              "",
+              "pm.test(\"Verify additional needs\", function () {",
+              "    pm.expect(pm.environment.get(\"additionalneeds\")).to.eql(responseBody.additionalneeds);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}booking/{{Id}}",
+          "host": [
+            "{{url}}booking"
+          ],
+          "path": [
+            "{{Id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteBooking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 200 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response message\", function () {",
+              "    pm.expect(pm.response.text()).to.eql(\"Deleted\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Basic",
+            "type": "text"
+          },
+          {
+            "key": "Cookie",
+            "value": "token= {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{url}}booking/{{Id}}",
+          "host": [
+            "{{url}}booking"
+          ],
+          "path": [
+            "{{Id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AfterDeleteChecking",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Assertion for the response status code",
+              "pm.test(\"Verify the response code 404 or Not\", function(){",
+              "    pm.expect(pm.response.code).to.eql(404);",
+              "})",
+              "",
+              "pm.test(\"Verify the response time as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);",
+              "})",
+              "",
+              "pm.test(\"Verify the response file size as expected or Not\", function(){",
+              "    pm.expect(pm.response.responseSize).to.be.below(50000);",
+              "})",
+              "",
+              "",
+              "pm.test(\"Verify the response message\", function () {",
+              "    pm.expect(pm.response.text()).to.eql(\"Not Found\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}booking/{{Id}}",
+          "host": [
+            "{{url}}booking"
+          ],
+          "path": [
+            "{{Id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

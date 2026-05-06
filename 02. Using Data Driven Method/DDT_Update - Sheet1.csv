@@ -1,0 +1,7 @@
+firstname,lastname,totalprice,depositpaid,checkin,checkout,additionalneeds
+Rimon,Khan,1000,TRUE,2026-04-26,2026-04-26,Cake
+karim,Hasan,100,FALSE,2026-04-27,2026-04-27,Mango
+Rakib,Ali,10,TRUE,2026-04-28,2026-04-28,Lemon 
+Karim,Khan,2000,FALSE,2026-05-01,2026-05-02,lemon 
+Mehedi,Hasan,1520,FALSE,2026-05-02,2026-05-03,lemon 
+Mostafizur,Rahman,1000,TRUE,2026-05-02,2026-05-04,lemon 
