@@ -274,7 +274,13 @@ The collection is executed using Newman CLI and generates automated reports.
 ![Newman Report](./newman-dashboard.png)
 
 ---
+# 🌐 Live Newman HTML Report
 
+## 🔗 View Live Report
+
+https://mostafizur-zahid.github.io/API-Testing-for-Restful-Booker/report.html
+
+---
 
 # ⚠️ Failed Assertions Analysis
 
